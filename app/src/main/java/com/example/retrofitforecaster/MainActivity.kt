@@ -14,7 +14,7 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     lateinit var mService: RetrofitServices
-    val adapter = Adapter()
+    private val adapter = Adapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.rView)
 
         val model: MyViewModel by viewModels()
-        model.getWeatherData().observe(this, Observer<List<ListItem>>{ weatherData ->
+        model.getWeatherData().observe(this) { weatherData ->
             adapter.submitList(weatherData)
-        })
+        }
 
         mService = Common.retrofitService
         recyclerView.layoutManager = LinearLayoutManager(this)

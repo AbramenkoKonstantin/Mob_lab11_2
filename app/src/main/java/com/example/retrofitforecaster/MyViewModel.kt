@@ -21,8 +21,6 @@ class MyViewModel : ViewModel() {
 
     private fun loadWeatherData() {
         val mService = Common.retrofitService
-        Timber.plant(Timber.DebugTree())
-        Timber.d("Привет")
         mService.getWeatherList().enqueue(object : Callback<DataWeather> {
             override fun onResponse(call: Call<DataWeather>, response: Response<DataWeather>) {
                 val dataWeather = response.body() as DataWeather
